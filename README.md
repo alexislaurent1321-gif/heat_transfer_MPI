@@ -1,3 +1,14 @@
+# Structure du projet
+
+- **Param.h :** Contient les paramètres physiques et numériques du problème
+- **solve :** Contient les fonctions parcticipant à la résolution système et calcul de T exact
+- **plot_mpi :** affiche le temps d'éxécution en fonction de la taille du système choisie
+- **plot_T :** affiche la température calculée
+
+L'éxécution se fait automatiquement sur 1, 2, puis 4 threads.
+
+# Problème mathématique
+
 Ce projet consiste à résoudre l'équation
 de chaleur 2D à coefficient constant. On dispose comme information d'une
 condition initiale qui correspond à la solution analytique en $t=0$ :
