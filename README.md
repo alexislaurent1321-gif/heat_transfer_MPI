@@ -64,10 +64,10 @@ Le bloc doit donc avoir une taille $N_{local} = \frac{N}{nprocs}+2$.\
 On veille bien à appliquer cette méthode sur les rangs intermédiaires :
 
 
-$$if \ rank>0$$ \
+$$if \ rank>0 \ : $$ \
 $$\qquad send(T[1][:], rank-1)$$ \
 $$\qquad recv(T[0][:], rank-1)$$ \
-$$if \ rank<nprocs-1$$ \
+$$if \ rank < nprocs-1 \ : $$ \
 $$\qquad recv(T[N_{local}-1][:], rank+1)$$ \
 $$\qquad send(T[N_{local}-2][:], rank+1)$$
 
