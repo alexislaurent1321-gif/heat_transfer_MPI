@@ -34,3 +34,41 @@ On réalise cette opération $Nt$ fois. La méthode étant explicite, on
 fixe $$dt$$ à $$1/2$$ fois la condition CFL :
 
 $$dt = \frac{1}{4 \kappa (\frac{1}{dx^{2}} + \frac{1}{dy^{2}})}$$
+
+## Parallélisation
+
+### Initialisation de T
+
+La parallélisation se fait par bloc sur l'axe $x$ de la matrice
+$(T)_{i,j}$.
+
+Soit $rank$ et $nprocs$, respectivement le numéro de processus et le
+nombre total de processus utilisés pendant l'éxécution et $N$ la taille
+de la matrice.\
+$$T_{i,j} = \frac{T_{max}}{1 + 4\kappa t / \sigma^{2}} exp(\frac{-x_{i}^{2}-y_{j}^{2}}{4\kappa t + \sigma^{2}})$$
+
+où
+
+$$\begin{aligned}
+&x_{i} = x_{min} + (N \* rank+i)\frac{x_{max}-x_{min}}{N*nprocs} \\
+&y_{j} = y_{min} + j\frac{y_{max}-y_{min}}{N}
+\end{aligned}$$
+
+### Différences finies
+
+Nous avons défini précédemment un bloc de taille $\frac{N}{nprocs}$.
+Cependant, nous devrions pour chaque ligne avoir accès à la ligne
+précédente et à la ligne suivante. Il faut donc ajouter au bloc la
+dernière ligne du bloc précédent et la première ligne du bloc suivant.
+Le bloc doit donc avoir une taille $N_{local} = \frac{N}{nprocs}+2$.\
+On veille bien à appliquer cette méthode sur les rangs intermédiaires :
+
+
+$$if \ rank>0$$ \
+$$\qquad send(T[1][:], rank-1)$$ \
+$$\qquad recv(T[0][:], rank-1)$$ \
+$$if \ rank<nprocs-1$$ \
+$$\qquad recv(T[N_{local}-1][:], rank+1)$$ \
+$$\qquad send(T[N_{local}-2][:], rank+1)$$
+
+
