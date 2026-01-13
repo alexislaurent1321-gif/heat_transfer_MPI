@@ -33,7 +33,3 @@ On réalise cette opération $Nt$ fois. La méthode étant explicite, on
 fixe $$dt$$ à $$1/2$$ fois la condition CFL :
 
 $$dt = \frac{1}{4 \kappa (\frac{1}{dx^{2}} + \frac{1}{dy^{2}})}$$
-<<<<<<< HEAD
-=======
-
->>>>>>> a66e1737cdb946ba4dd4103b67dbbd6e97803227
