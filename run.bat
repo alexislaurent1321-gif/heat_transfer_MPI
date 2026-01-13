@@ -1,6 +1,5 @@
 @echo off
 
-:: Compilation avec mpic++
 mpic++ -std=c++20 -o test.exe main.cpp solve.cpp
 
 :: Exécution avec mpirun pour 1, 2 et 4 processus
@@ -12,7 +11,7 @@ mpiexec --use-hwthread-cpus -n 4 test.exe
 python plot_T.py
 python plot_mpi.py
 
-:: Suppression des fichiers
+:: Suppression des fichiers de données
 del test.exe
 
 del mpi_results_1.txt
