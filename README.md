@@ -1,3 +1,6 @@
+# Compilation et exécution
+Le programme nécessite l'installation des bibliothèques `matplotlib` et `numpy` pour python ainsi que l'installation de `MPI`. La compilation et l'exécution se font sur linux avec l'instruction `bash run.sh`.
+
 # Structure du projet
 
 - `Param.h` : Contient les paramètres physiques et numériques du problème
