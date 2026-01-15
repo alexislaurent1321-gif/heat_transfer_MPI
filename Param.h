@@ -23,7 +23,7 @@ struct Param{
     double t_final = 1e4;   // time at which T is calculated
 
 
-    // Paramètres numériques
+    // Numerical parameters
 
     std::vector<int> sizes = {64, 128, 256, 512}; // sizes of matrices to be tested
     double dx, dy, dt;
