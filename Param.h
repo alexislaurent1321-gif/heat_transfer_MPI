@@ -4,6 +4,9 @@
 #ifndef PARAM_H
 #define PARAM_H
 
+/**
+ * \brief Structure contenant les paramètres de la simulation
+ */
 struct Param{
 
     // Physical parameters
