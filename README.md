@@ -1,12 +1,12 @@
 # Structure du projet
 
-- **Param.h :** Contient les paramètres physiques et numériques du problème
-- **solve :** Contient les fonctions parcticipant à la résolution système et calcul de T exact
-- **merge** : fusionne les fichiers de onnées calculés pour chaque processus
-- **plot_mpi.py :** affiche le temps d'éxécution en fonction de la taille du système choisie avec matplotlib
-- **plot_T.py :** affiche la température calculée avec matplotlib
+- `Param.h` : Contient les paramètres physiques et numériques du problème
+- `solve` :` Contient les fonctions parcticipant à la résolution système et calcul de T exact
+- `merge` : fusionne les fichiers de onnées calculés pour chaque processus
+- `plot_mpi.py` : affiche le temps d'éxécution en fonction de la taille du système choisie avec matplotlib
+- `plot_T.py` : affiche la température calculée avec matplotlib
 
-L'éxécution se fait automatiquement sur 1, 2, puis 4 threads.
+L'éxécution se fait automatiquement sur 1, 2, puis 4 processus.
 
 # Problème mathématique
 
