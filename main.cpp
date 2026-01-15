@@ -11,7 +11,7 @@
 #include <fmt/core.h>
 
 
-Param p; // Importation des paramètres
+Param p; // Importing settings
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -21,8 +21,8 @@ int main(int argc, char* argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
 
-    // Fichiers pour sauvegarder les résultats
-    ofstream results;  // fichier contenant les résultats de performance 
+    // Files for saving results
+    ofstream results;  // file containing performance results
     if (rank == 0) {
         cout << "nprocs = " << nprocs << endl;
         if(nprocs==1) results.open("mpi_results_1.txt");
@@ -32,25 +32,25 @@ int main(int argc, char* argv[]) {
 
     for (int N : p.sizes) {
         if(rank==0) cout << "N = " << N << endl;
-        p.update(N); // Calcul des paramètres numériques
+        p.update(N); // Calculation of numerical parameters
 
-        // Calcul de l'erreur en norme infinie pour chaque thread
+        // Calculation of the infinite standard error for each thread
         double err_max_local = 0;
         double Tmax_local = 0;
         double parallel_time = solve(N, rank, nprocs, &err_max_local, &Tmax_local);
 
-        // Temps d'éxécution maximal pour un thread
+        // Maximum execution time for a thread
         double max_parallel_time;
         MPI_Reduce(&parallel_time, &max_parallel_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
         
-        // erreur maximale de T
+        // maximum error of T
         double err_max;
         MPI_Reduce(&err_max_local, &err_max, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
         double Tmax;
         MPI_Reduce(&Tmax_local, &Tmax, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 
 
-        // erreur max relative(%)
+        // relative max error (%)
         double err_max_rel = err_max / Tmax * 100.; 
 
         if (rank == 0) {

@@ -6,32 +6,32 @@
 
 struct Param{
 
-    // Paramètres physiques
+    // Physical parameters
 
-    // Taille de domaine
+    // domain size
     double xmin=-0.5; 
     double xmax=0.5;
     double ymin=-0.5; 
     double ymax=0.5; 
 
-    double kappa = 1e-6; // coefficient de diffusion constant
-    double Tmax = 1350; // amplitude
-    double sigma = 0.3; // ecart-type de la solution gaussienne
-    double t_final = 1e4; // temps auquel est calculé T
+    double kappa = 1e-6;    // constant diffusion coefficient
+    double Tmax = 1350;     // amplitude
+    double sigma = 0.3;     // standard deviation of the Gaussian solution
+    double t_final = 1e4;   // time at which T is calculated
 
 
     // Paramètres numériques
 
-    std::vector<int> sizes = {64, 128, 256, 512}; // tailles des matrices à tester
+    std::vector<int> sizes = {64, 128, 256, 512}; // sizes of matrices to be tested
     double dx, dy, dt;
     int Nt;
 
-    // Calcul des paramètres numériques selon la taille du système
+    // Calculation of numerical parameters according to system size
     void update(int size){
         dx = (xmax-xmin)/size;
         dy = (ymax-ymin)/size;
-        dt = 1./(4 * kappa * (1/pow(dx,2) + 1/pow(dy,2))); // dt vaut 1/2 fois la condition CFL
-        Nt = (int)(t_final/dt); // nombre d'itérations pour les différences finies
+        dt = 1./(4 * kappa * (1/pow(dx,2) + 1/pow(dy,2)));  // dt is equal to half the CFL condition
+        Nt = (int)(t_final/dt);                             // number of iterations for finite differences
     }
 };
 

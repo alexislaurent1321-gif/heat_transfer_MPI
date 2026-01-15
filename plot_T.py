@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 T = np.loadtxt("T_data.txt")
 
-# plot
+# Plot
 fig, ax = plt.subplots(figsize=(10,7))
 im = ax.pcolormesh(T, cmap='rainbow', vmin=0, vmax=1350)
 

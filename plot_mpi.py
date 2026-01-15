@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Chargement des données
+# Loading data
 
 data1 = np.loadtxt("mpi_results_1.txt")
 data2 = np.loadtxt("mpi_results_2.txt")

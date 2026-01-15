@@ -6,13 +6,13 @@
 #include <iostream>
 #include <fmt/core.h>
 
-extern Param p; // Importation des paramètres
+extern Param p; // Importing settings
 
-// Fonctions concernant la température exacte
+// Functions related to the exact temperature
 
-/* Solution exacte pour la température
-Remplissage de T au temps t
-Division par bloc sur x
+/* Exact solution for temperature
+Filling T at time t
+Block division on x
 */
 void T_ex(vector<vector<double>>& T, double t, int Nx, int Ny, int rank, int nprocs){
     double x, y;
@@ -25,16 +25,16 @@ void T_ex(vector<vector<double>>& T, double t, int Nx, int Ny, int rank, int npr
     }
 }
 
-// Solution exacte de T évaluée en un point
+// Exact solution of T evaluated at a point
 double T_ex(double t, double x, double y){
     return p.Tmax/(1+2*t*p.kappa/pow(p.sigma,2))*exp((-pow(x,2)-pow(y,2))/(2*pow(p.sigma,2)+4*t*p.kappa));
 }
 
-// Calcul de l'erreur en norme infinie entre T et T_ex
+// Calculation of the infinite standard error between T and T_ex
 double error_T(vector<vector<double>> T, int Nx, int Ny, int rank, int nprocs){
-    double err = 0; // erreur max
-    double err_ij; // erreur évaluée en un point
-    double x, y; // définition de x et y en fonction des indices i et j
+    double err = 0;     // max arror
+    double err_ij;      // error evaluated at a point
+    double x, y;        // definition of x and y based on indices i and j
     for(int i=1; i<Nx-1; i++){
         x = p.xmin + (rank*Nx+i)*(p.xmax-p.xmin)/(Nx*nprocs);
         for(int j=0; j<Ny; j++){
@@ -43,15 +43,15 @@ double error_T(vector<vector<double>> T, int Nx, int Ny, int rank, int nprocs){
             if(err<err_ij) err=err_ij;
         }
     }
-    // std::cout << nprocs << std::endl;
+
     return err;
 }
 
-// Calcul de l'erreur en norme infinie entre T et T_ex
+// Calculation of the infinite standard error between T and T_ex
 double max_T(vector<vector<double>> T, int Nx, int Ny, int rank, int nprocs){
     double Tmax = 0;
-    double T_ij; // erreur évaluée en un point
-    double x, y; // définition de x et y en fonction des indices i et j
+    double T_ij;    // error evaluated at a point
+    double x, y;    // definition of x and y based on indices i and j
     for(int i=1; i<Nx-1; i++){
         x = p.xmin + (rank*Nx+i)*(p.xmax-p.xmin)/(Nx*nprocs);
         for(int j=0; j<Ny; j++){
@@ -67,10 +67,10 @@ double max_T(vector<vector<double>> T, int Nx, int Ny, int rank, int nprocs){
 
 
 /*
-Fonctions de résolution numérique
+Numerical resolution functions
 */
 
-// Mise à jour de T par différences finies
+// Update T using finite differences
 void updateT(const vector<vector<double>>& T, vector<vector<double>>& T_plus, int Nx, int Ny, int rank, int nprocs) {
     for(int i=1; i<Nx-1; ++i) {
         for(int j=1; j<Ny-1; ++j) {
@@ -82,16 +82,16 @@ void updateT(const vector<vector<double>>& T, vector<vector<double>>& T_plus, in
 }
 
 
-// Fonction pour exécuter la méthode Jacobi avec MPI
+// Function to execute the Jacobi method with MPI
 double solve(int N, int rank, int nprocs, double *err_max, double *Tmax) {
-    // cout << p.dx << endl;
+
     int N_local = 0;
     if(nprocs==1) 
         N_local = N;
     else
-        N_local = N / nprocs + 2; // Nombre de lignes locales (inclut lignes fantômes)
+        N_local = N / nprocs + 2; // Number of local lines (includes ghost lines)
 
-    // Création et remplissage du bloc T avec la solution au temps initial
+    // Creation and filling of block T with the solution at initial time
     vector<vector<double>> T(N_local,vector<double>(N,0));
     vector<vector<double>> T_plus(N_local,vector<double>(N,0));
     T_ex(T,0,N_local,N,rank,nprocs);
@@ -100,7 +100,7 @@ double solve(int N, int rank, int nprocs, double *err_max, double *Tmax) {
     double start_time = MPI_Wtime();
 
     for (int iter = 0; iter <= p.Nt; ++iter) {
-        // Échanger les valeurs des frontières avec les threads voisins
+        // Exchange border values with neighboring threads
         if (rank > 0) {
             MPI_Send(&T[1][0], N, MPI_DOUBLE, rank-1, 0, MPI_COMM_WORLD);
             MPI_Recv(&T[0][0], N, MPI_DOUBLE, rank-1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -112,12 +112,12 @@ double solve(int N, int rank, int nprocs, double *err_max, double *Tmax) {
 
         MPI_Barrier(MPI_COMM_WORLD);
 
-        // Calcul de la mise à jour de T
+        // Calculation of the update of T
         updateT(T, T_plus, N_local, N, rank, nprocs);
         T.swap(T_plus);
     }
 
-    // Impression du tableau T
+    // Printing the table T
     std::vector<ofstream> T_file(nprocs);
     T_file[rank].open(fmt::format("T_data_{}.txt", rank));
     for(int i=1; i<N_local-1; i++){
@@ -129,7 +129,7 @@ double solve(int N, int rank, int nprocs, double *err_max, double *Tmax) {
     T_file[rank].close();
 
     
-    // Calcul de l'erreur inf
+    // Calculation of the inf error
     *err_max = error_T(T_plus, N_local, N, rank, nprocs);
     *Tmax = max_T(T_plus, N_local, N, rank, nprocs);
 

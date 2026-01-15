@@ -3,9 +3,9 @@
 #include <vector>
 #include <string>
 
-// Permet de contaténer une liste de plusieurs fichiers (fileNames) textes dans un nouveau fichier(outputFile)
+// Allows you to contain a list of several text files (fileNames) in a new file (outputFile)
 void mergeFiles(const std::vector<std::string>& fileNames, const std::string& outputFile) {
-    std::ofstream outputFileStream(outputFile); // nouveau fichier
+    std::ofstream outputFileStream(outputFile); // new file
 
     if (!outputFileStream.is_open()) {
         std::cerr << "Error: Could not open the output file: " << outputFile << '\n';
@@ -17,18 +17,17 @@ void mergeFiles(const std::vector<std::string>& fileNames, const std::string& ou
 
         if (!inputFile.is_open()) {
             std::cerr << "Error: Could not open input file: " << fileName << '\n';
-            continue; // Skip to the next file if the current one cannot be opened
+            continue; // skip to the next file if the current one cannot be opened
         }
 
         std::string line;
         while (std::getline(inputFile, line)) {
-            outputFileStream << line << '\n'; // Write the line to the output file
+            outputFileStream << line << '\n'; // write the line to the output file
         }
 
         inputFile.close();
     }
 
-    // std::cout << "Files merged successfully into " << outputFile << "\n";
     outputFileStream.close();
 }
 
