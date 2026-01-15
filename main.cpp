@@ -6,7 +6,7 @@
 #include <cmath>
 #include <vector>
 #include "solve.h"
-#include "Param.h"
+#include "param.h"
 #include "merge.h"
 #include <fmt/core.h>
 
