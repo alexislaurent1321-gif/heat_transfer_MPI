@@ -1,15 +1,15 @@
 mpic++ -std=c++20 -o test.exe main.cpp solve.cpp
 
-# Exécution avec mpirun pour 1, 2 et 4 processus
+# Running with mpirun for 1, 2, and 4 processes
 mpirun --use-hwthread-cpus -np 1 test.exe
 mpirun --use-hwthread-cpus -np 2 test.exe
 mpirun --use-hwthread-cpus -np 4 test.exe
 
-# Exécution des scripts Python
+# Running Python scripts
 python3 plot_T.py
 python3 plot_mpi.py
 
-# Suppression des fichiers de données
+# Deletion of data files
 rm test.exe
 
 rm mpi_results_1.txt
