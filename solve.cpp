@@ -8,12 +8,7 @@
 
 extern Param p; // Importing settings
 
-// Functions related to the exact temperature
 
-/* Exact solution for temperature
-Filling T at time t
-Block division on x
-*/
 void T_ex(vector<vector<double>>& T, double t, int Nx, int Ny, int rank, int nprocs){
     double x, y;
     for(int i=0; i<Nx; ++i){
@@ -25,12 +20,12 @@ void T_ex(vector<vector<double>>& T, double t, int Nx, int Ny, int rank, int npr
     }
 }
 
-// Exact solution of T evaluated at a point
+
 double T_ex(double t, double x, double y){
     return p.Tmax/(1+2*t*p.kappa/pow(p.sigma,2))*exp((-pow(x,2)-pow(y,2))/(2*pow(p.sigma,2)+4*t*p.kappa));
 }
 
-// Calculation of the infinite standard error between T and T_ex
+
 double error_T(vector<vector<double>> T, int Nx, int Ny, int rank, int nprocs){
     double err = 0;     // max arror
     double err_ij;      // error evaluated at a point
@@ -47,7 +42,7 @@ double error_T(vector<vector<double>> T, int Nx, int Ny, int rank, int nprocs){
     return err;
 }
 
-// Calculation of the infinite standard error between T and T_ex
+
 double max_T(vector<vector<double>> T, int Nx, int Ny, int rank, int nprocs){
     double Tmax = 0;
     double T_ij;    // error evaluated at a point
@@ -70,7 +65,7 @@ double max_T(vector<vector<double>> T, int Nx, int Ny, int rank, int nprocs){
 Numerical resolution functions
 */
 
-// Update T using finite differences
+
 void updateT(const vector<vector<double>>& T, vector<vector<double>>& T_plus, int Nx, int Ny, int rank, int nprocs) {
     for(int i=1; i<Nx-1; ++i) {
         for(int j=1; j<Ny-1; ++j) {
@@ -82,7 +77,7 @@ void updateT(const vector<vector<double>>& T, vector<vector<double>>& T_plus, in
 }
 
 
-// Function to execute the Jacobi method with MPI
+
 double solve(int N, int rank, int nprocs, double *err_max, double *Tmax) {
 
     int N_local = 0;

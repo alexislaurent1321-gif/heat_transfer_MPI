@@ -5,7 +5,7 @@
 #define PARAM_H
 
 /**
- * \brief Structure contenant les paramètres de la simulation
+ * \brief Structure containing the simulation parameters
  */
 struct Param{
 
