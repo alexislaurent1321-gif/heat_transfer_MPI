@@ -101,7 +101,7 @@ Problème mathématique</h1>
 <p>On réalise cette opération $Nt$ fois. La méthode étant explicite, on fixe $$dt$$ à $$1/2$$ fois la condition CFL :</p>
 <p>$$dt = \frac{1}{4 \kappa (\frac{1}{dx^{2}} + \frac{1}{dy^{2}})}$$</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
-Parallélisation</h2>
+Démarche</h2>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
 Initialisation de T</h3>
 <p>La parallélisation se fait par bloc sur l'axe $x$ de la matrice _{i,j}$.</p>
@@ -109,7 +109,7 @@ Initialisation de T</h3>
 <p>où</p>
 <p>$$\begin{aligned} &amp;x_{i} = x_{min} + (N * rank+i)\frac{x_{max}-x_{min}}{N*nprocs} \ &amp;y_{j} = y_{min} + j\frac{y_{max}-y_{min}}{N} \end{aligned}$$</p>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
-Différences finies</h3>
+Parallélisation</h3>
 <p>Nous avons défini précédemment un bloc de taille $\frac{N}{nprocs}$. Cependant, nous devrions pour chaque ligne avoir accès à la ligne précédente et à la ligne suivante. Il faut donc ajouter au bloc la dernière ligne du bloc précédent et la première ligne du bloc suivant. Le bloc doit donc avoir une taille $N_{local} = \frac{N}{nprocs}+2$.\ On veille bien à appliquer cette méthode sur les rangs intermédiaires :</p>
 <p>$$if \ rank&gt;0 \ : $$ \ $$\qquad send(T[1][:], rank-1)$$ \ $$\qquad recv(T[0][:], rank-1)$$ \ $$if \ rank &lt; nprocs-1 \ : $$ \ $$\qquad recv(T[N_{local}-1][:], rank+1)$$ \ $$\qquad send(T[N_{local}-2][:], rank+1)$$ </p>
 </div></div><!-- contents -->
