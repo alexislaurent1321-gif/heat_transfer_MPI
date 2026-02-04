@@ -38,7 +38,7 @@ fixe $$dt$$ à $$1/2$$ fois la condition CFL :
 
 $$dt = \frac{1}{4 \kappa (\frac{1}{dx^{2}} + \frac{1}{dy^{2}})}$$
 
-## Parallélisation
+## Démarche
 
 ### Initialisation de T
 
@@ -57,7 +57,7 @@ $$\begin{aligned}
 &y_{j} = y_{min} + j\frac{y_{max}-y_{min}}{N}
 \end{aligned}$$
 
-### Différences finies
+### Parallélisation
 
 Nous avons défini précédemment un bloc de taille $\frac{N}{nprocs}$.
 Cependant, nous devrions pour chaque ligne avoir accès à la ligne
