@@ -116,6 +116,7 @@ double solve(int N, int rank, int nprocs, double *err_max, double *Tmax) {
         updateT(T, T_plus, N_local, N, rank, nprocs);
         T.swap(T_plus);
     }
+    double end_time = MPI_Wtime();
 
     // Printing the table T
     std::vector<ofstream> T_file(nprocs);
@@ -133,6 +134,5 @@ double solve(int N, int rank, int nprocs, double *err_max, double *Tmax) {
     *err_max = error_T(T_plus, N_local, N, rank, nprocs);
     *Tmax = max_T(T_plus, N_local, N, rank, nprocs);
 
-    double end_time = MPI_Wtime();
-    return end_time - start_time;
+    return end_time - start_time; // compute time
 }
