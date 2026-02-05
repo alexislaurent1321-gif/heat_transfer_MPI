@@ -11,6 +11,6 @@ ax.set_xlabel("Nx")
 ax.set_ylabel("Nz")
 
 fig.colorbar(im, ax=ax)
-plt.savefig("T_t=5e4.jpg")
+plt.savefig("graph/img/T_t=5e4.jpg")
 
 plt.show()
