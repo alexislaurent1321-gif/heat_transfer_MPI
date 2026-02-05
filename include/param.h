@@ -25,7 +25,7 @@ struct Param{
 
     // Numerical parameters
 
-    std::vector<int> sizes = {64, 128}; // sizes of matrices to be tested
+    std::vector<int> sizes = {64, 128, 256}; // sizes of matrices to be tested
     double dx, dy, dt;
     int Nt;
 

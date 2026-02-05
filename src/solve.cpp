@@ -85,7 +85,7 @@ void updateT(const std::vector<double>& T, std::vector<double>& T_plus, int Nx, 
         
         for(int j=1; j < Ny-1; ++j) {
             index = i * Ny + j;
-            // Correction des parenthèses d'indexation
+
             T_plus[index] = T[index] + p.kappa * p.dt * (
                 (T[(i+1)*Ny + j] - 2*T[index] + T[(i-1)*Ny + j]) / (p.dx*p.dx) +
                 (T[index + 1] - 2*T[index] + T[index - 1]) / (p.dy*p.dy)
@@ -97,7 +97,7 @@ void updateT(const std::vector<double>& T, std::vector<double>& T_plus, int Nx, 
 
 // Function to execute the Jacobi method with MPI
 double solve(int N, int rank, int nprocs, double *err_max, double *Tmax) {
-    // N_local inclut 2 lignes fantômes (sauf bords extrêmes, mais simplifié ici)
+
     int Nx_local = N / nprocs + 2;
     int Ny = N;
 
@@ -110,7 +110,7 @@ double solve(int N, int rank, int nprocs, double *err_max, double *Tmax) {
     double start_time = MPI_Wtime();
 
     for (int iter = 0; iter < p.Nt; ++iter) {
-        // Échanges des Ghost Cells (Bloquants mais sûrs pour débuter)
+
         if (rank > 0) {
             MPI_Sendrecv(&T[Ny], Ny, MPI_DOUBLE, rank-1, 0, 
                          &T[0], Ny, MPI_DOUBLE, rank-1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -126,7 +126,6 @@ double solve(int N, int rank, int nprocs, double *err_max, double *Tmax) {
     
     double end_time = MPI_Wtime();
 
-    // Sauvegarde propre
     std::ofstream file(fmt::format("T_data_{}.txt", rank));
     for(int i=1; i < Nx_local-1; i++){
         for(int j=0; j < Ny; j++){
