@@ -30,6 +30,8 @@ int main(int argc, char* argv[]) {
         if(nprocs==4) results.open("mpi_results_4.txt");
     }
 
+    p.load("parameters.json"); // Load settings from config file
+    
     for (int N : p.sizes) {
         if(rank==0) cout << "N = " << N << endl;
         p.update(N); // Calculation of numerical parameters
