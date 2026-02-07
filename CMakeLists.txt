@@ -14,6 +14,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(fmt)
 
+include(FetchContent)
+FetchContent_Declare(
+  json
+  URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz
+)
+FetchContent_MakeAvailable(json)
+
 add_executable(heat_solver 
     src/main.cpp 
     src/solve.cpp
@@ -25,4 +32,5 @@ target_link_libraries(heat_solver
     PRIVATE 
     MPI::MPI_CXX
     fmt::fmt-header-only
+    nlohmann_json::nlohmann_json
 )
