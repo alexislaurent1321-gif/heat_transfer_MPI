@@ -1,4 +1,3 @@
-#define FMT_HEADER_ONLY
 #include <mpi.h>
 #include <iostream>
 #include <fstream>
@@ -31,7 +30,7 @@ int main(int argc, char* argv[]) {
     }
 
     p.load("parameters.json"); // Load settings from config file
-    
+
     for (int N : p.sizes) {
         if(rank==0) cout << "N = " << N << endl;
         p.update(N); // Calculation of numerical parameters
