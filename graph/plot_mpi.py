@@ -16,12 +16,12 @@ time2 = data2[:,1]
 time4 = data4[:,1]
 
 plt.figure(figsize=(12,8))
-plt.plot(sizes, time1, marker='o', label=f'nprocs=1')
-plt.plot(sizes, time2, marker='o', label=f'nprocs=2')
-plt.plot(sizes, time4, marker='o', label=f'nprocs=4')
+plt.plot(sizes, time1 / time1, marker='o', label=f'nprocs=1')
+plt.plot(sizes, time1 / time2, marker='o', label=f'nprocs=2')
+plt.plot(sizes, time1 / time4, marker='o', label=f'nprocs=4')
 
 plt.xlabel("N")
-plt.ylabel("temps (s)")
+plt.ylabel("speedup")
 plt.legend()
 plt.grid()
 plt.savefig("graph/img/performances_t=5e4.jpg")

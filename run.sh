@@ -7,6 +7,7 @@ cd ..
 mpirun --use-hwthread-cpus -np 1 ./build/heat_solver
 mpirun --use-hwthread-cpus -np 2 ./build/heat_solver
 mpirun --use-hwthread-cpus -np 4 ./build/heat_solver
+mpirun --use-hwthread-cpus -np 8 ./build/heat_solver
 
 if [ -d ".venv/" ]; then
     . .venv/bin/activate
