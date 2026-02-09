@@ -21,7 +21,7 @@ Functions implementing the parallelized finite difference method
 */
 
 // Update T using finite differences over a time iteration
-void updateT(const std::vector<double>& T, std::vector<double>& T_plus, int Nx, int Ny);   
+void updateT(const std::vector<double>& T, std::vector<double>& T_plus, int Nx_ghost, int Ny_ghost) ;   
   
 // Resolution of T with MPI
 double solve(int N, int rank, int nprocs, double *err_max, double *Tmax);
