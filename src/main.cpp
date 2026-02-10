@@ -6,8 +6,6 @@
 #include <vector>
 #include "solve.h"
 #include "param.h"
-#include "merge.h"
-#include <fmt/core.h>
 
 
 Param p; // Importing settings
@@ -36,20 +34,17 @@ int main(int argc, char* argv[]) {
         p.update(N); // Calculation of numerical parameters
 
         // Calculation of the infinite standard error for each thread
-        double err_max_local = 0;
-        double Tmax_local = 0;
-        double parallel_time = solve(N, rank, nprocs, &err_max_local, &Tmax_local);
+        std::shared_ptr<double> err_max_local = std::make_shared<double>(0.);
+        std::shared_ptr<double> Tmax_local = std::make_shared<double>(0.);
+        double parallel_time = solve(N, rank, nprocs, err_max_local, Tmax_local);
 
         // Maximum execution time for a thread
         double max_parallel_time;
         MPI_Reduce(&parallel_time, &max_parallel_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
         
         // maximum error of T
-        double err_max;
-        MPI_Reduce(&err_max_local, &err_max, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-        double Tmax;
-        MPI_Reduce(&Tmax_local, &Tmax, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-
+        double err_max = *err_max_local;
+        double Tmax = *Tmax_local;
 
         // relative max error (%)
         double err_max_rel = err_max / Tmax * 100.; 
@@ -65,12 +60,6 @@ int main(int argc, char* argv[]) {
     if (rank == 0) {
         results.close();
         cout << "Résultats sauvegardés dans 'mpi_results.txt'.\n";
-
-        vector<string> fileNames(nprocs);
-        for(int rank=0; rank<nprocs; rank++){
-            fileNames[rank] = fmt::format("T_data_{}.txt", rank);
-        }
-        mergeFiles(fileNames, "T_data.txt");    
     }
     
     MPI_Finalize();

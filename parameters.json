@@ -6,6 +6,6 @@
     "sigma": 0.3
   },
   "simulation": {
-    "sizes": [64, 128]
+    "sizes": [16, 32]
   }
 }
