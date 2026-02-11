@@ -27,6 +27,7 @@ plt.grid()
 plt.savefig("graph/img/performances_t=5e4.jpg")
 plt.show()
 
+
 # Plot errors
 
 error_data1 = np.loadtxt("error_1.txt")
@@ -38,12 +39,15 @@ error2 = error_data2[:,1]
 error4 = error_data4[:,1]
 
 plt.figure(figsize=(12,8))
-plt.plot(sizes, error1, marker='o', label=f'nprocs=1')
-plt.plot(sizes, error2, marker='o', label=f'nprocs=2')
-plt.plot(sizes, error4, marker='o', label=f'nprocs=4')
+plt.plot(np.log2(sizes), np.log2(error1), ':o', label=f'nprocs=1')
+plt.plot(np.log2(sizes), np.log2(error2), '--', label=f'nprocs=2')
+plt.plot(np.log2(sizes), np.log2(error4), ':+', label=f'nprocs=4')
 
 plt.xlabel("N")
 plt.ylabel("Error")
+# plt.ylim(0, np.max(np.log2([error1, error2, error4])) * 1.1)
+# plt.xlim(sizes[0] - 0.5, sizes[-1] + 0.5)
+
 plt.legend()
 plt.grid()
 plt.savefig("graph/img/errors_t=5e4.jpg")
