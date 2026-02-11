@@ -27,6 +27,15 @@ int main(int argc, char* argv[]) {
         if(nprocs==4) results.open("mpi_results_4.txt");
     }
 
+    // Files for saving errors
+    ofstream errors_file;  // file containing performance results
+    if (rank == 0) {
+        cout << "nprocs = " << nprocs << endl;
+        if(nprocs==1) errors_file.open("error_1.txt");
+        if(nprocs==2) errors_file.open("error_2.txt");
+        if(nprocs==4) errors_file.open("error_4.txt");
+    }
+
     p.load("parameters.json"); // Load settings from config file
 
     for (int N : p.sizes) {
@@ -51,7 +60,7 @@ int main(int argc, char* argv[]) {
 
         if (rank == 0) {
             results << N << "  " << max_parallel_time << endl;
-            cout << "Erreur relative en norme infinie = " << err_max_rel << "%" << endl;
+            errors_file << N << "  " << err_max_rel << endl;
         }
     }
     
@@ -60,6 +69,9 @@ int main(int argc, char* argv[]) {
     if (rank == 0) {
         results.close();
         cout << "Résultats sauvegardés dans 'mpi_results.txt'.\n";
+
+        errors_file.close();
+        cout << "Erreurs sauvegardées dans 'error.txt'.\n";
     }
     
     MPI_Finalize();
