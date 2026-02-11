@@ -43,10 +43,8 @@ plt.plot(np.log2(sizes), np.log2(error1), ':o', label=f'nprocs=1')
 plt.plot(np.log2(sizes), np.log2(error2), '--', label=f'nprocs=2')
 plt.plot(np.log2(sizes), np.log2(error4), ':+', label=f'nprocs=4')
 
-plt.xlabel("N")
-plt.ylabel("Error")
-# plt.ylim(0, np.max(np.log2([error1, error2, error4])) * 1.1)
-# plt.xlim(sizes[0] - 0.5, sizes[-1] + 0.5)
+plt.xlabel("log2(N)")
+plt.ylabel("log2(Error)")
 
 plt.legend()
 plt.grid()

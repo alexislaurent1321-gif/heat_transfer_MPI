@@ -13,7 +13,7 @@ if [ -d ".venv/" ]; then
     . .venv/bin/activate
 fi
 
-# python3 graph/plot_T.py
+python3 graph/plot_T.py
 python3 graph/plot_mpi.py
 
 rm mpi_results*.txt 
