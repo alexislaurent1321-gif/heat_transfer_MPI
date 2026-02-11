@@ -74,4 +74,9 @@ $$if \ rank < nprocs-1 \ : $$ \
 $$\qquad recv(T[N_{local}-1][:], rank+1)$$ \
 $$\qquad send(T[N_{local}-2][:], rank+1)$$
 
+# Convergence
+
+L'erreur
+
+En affichant le log-log, la courbe est linéaire et les résultats sont les mêmes pour chaque nombre de processus. La parallélisation a donc fonctionné.
 
