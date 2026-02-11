@@ -46,33 +46,45 @@ void apply_boundaries(std::vector<double>& T, double t, int Nx_ghost, int Ny_gho
 
     // Global top border (i = 0)
     if (coords[0] == 0) {
+ 
         for (int j = 0; j < Ny_ghost; ++j) {
             double x = p.xmin - p.dx; 
             double y = p.ymin + (coords[1] * Ny_local + (j - 1)) * p.dy;
+            
             T[0 * Ny_ghost + j] = T_ex(t, x, y);
         }
     }
+
     // Global bottom border (i = Nx_ghost - 1)
     if (coords[0] == dims[0] - 1) {
+        
         for (int j = 0; j < Ny_ghost; ++j) {
             double x = p.xmax + p.dx;
             double y = p.ymin + (coords[1] * Ny_local + (j - 1)) * p.dy;
+            
             T[(Nx_ghost - 1) * Ny_ghost + j] = T_ex(t, x, y);
         }
     }
+
     // Global left border (j = 0)
     if (coords[1] == 0) {
+        
         for (int i = 0; i < Nx_ghost; ++i) {
+            
             double x = p.xmin + (coords[0] * Nx_local + (i - 1)) * p.dx;
             double y = p.ymin - p.dy;
+            
             T[i * Ny_ghost + 0] = T_ex(t, x, y);
         }
     }
+
     // Global right border (j = Ny_ghost - 1)
     if (coords[1] == dims[1] - 1) {
+
         for (int i = 0; i < Nx_ghost; ++i) {
             double x = p.xmin + (coords[0] * Nx_local + (i - 1)) * p.dx;
             double y = p.ymax + p.dy;
+
             T[i * Ny_ghost + (Ny_ghost - 1)] = T_ex(t, x, y);
         }
     }
@@ -87,10 +99,13 @@ double error_T(const std::vector<double>& T, int Nx_ghost, int Ny_ghost, int coo
 
     for(int i = 1; i < Nx_ghost - 1; ++i) {
         double x = p.xmin + (coords[0] * Nx_local + (i - 1)) * p.dx;
+
         for(int j = 1; j < Ny_ghost - 1; ++j) {
             double y = p.ymin + (coords[1] * Ny_local + (j - 1)) * p.dy;
             double diff = std::abs(T[i * Ny_ghost + j] - T_ex(p.t_final, x, y));
-            if (diff > err_max_local) err_max_local = diff;
+
+            if (diff > err_max_local) 
+                err_max_local = diff;
         }
     }
     return err_max_local;
@@ -100,10 +115,12 @@ double max_T(const std::vector<double>& T, int Nx_ghost, int Ny_ghost) {
     double Tmax_local = 0;
 
     for(int i = 1; i < Nx_ghost - 1; ++i) {
+        
         for(int j = 1; j < Ny_ghost - 1; ++j) {
-            
             double val = std::abs(T[i * Ny_ghost + j]);
-            if(val > Tmax_local) Tmax_local = val;
+            
+            if(val > Tmax_local) 
+                Tmax_local = val;
         }
     }
     return Tmax_local;
@@ -189,6 +206,10 @@ double solve(int N, int rank, int nprocs, std::shared_ptr<double> err_max, std::
         file << "\n";
     }
     file.close();
+
+    std::ofstream processFile("Process_datas.txt");
+    processFile << dims[0] << " " << dims[1];
+    processFile.close();
 
     // Global Error Reduction
     double l_err = error_T(T, Nx_ghost, Ny_ghost, coords);

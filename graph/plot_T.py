@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def reconstruct_2d(nprocs_x, nprocs_y):
+def reconstruct_2d():
     full_matrix = []
+    nprocs_x, nprocs_y = np.loadtxt("Process_datas.txt", dtype=int)
 
     for i in range(nprocs_x):
         row_blocks = []
@@ -17,7 +18,7 @@ def reconstruct_2d(nprocs_x, nprocs_y):
 
 # Plot
 fig, ax = plt.subplots(figsize=(10,7))
-T = reconstruct_2d(2, 2)
+T = reconstruct_2d()
 im = ax.pcolormesh(T, cmap='rainbow', vmin=0, vmax=1350)
 
 ax.set_xlabel("Nx")

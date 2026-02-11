@@ -4,8 +4,8 @@ cmake -DCMAKE_CXX_COMPILER=mpicxx ..
 make
 cd ..
 
-# mpirun --use-hwthread-cpus -np 1 ./build/heat_solver
-# mpirun --use-hwthread-cpus -np 2 ./build/heat_solver
+mpirun --use-hwthread-cpus -np 1 ./build/heat_solver
+mpirun --use-hwthread-cpus -np 2 ./build/heat_solver
 # mpirun --use-hwthread-cpus -np 3 ./build/heat_solver
 mpirun --use-hwthread-cpus -np 4 ./build/heat_solver
 # mpirun --use-hwthread-cpus -np 8 ./build/heat_solver
@@ -19,3 +19,4 @@ python3 graph/plot_mpi.py
 
 rm mpi_results*.txt 
 rm T_data*.txt 
+rm Process_datas.txt
