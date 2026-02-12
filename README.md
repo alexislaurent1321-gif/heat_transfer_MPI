@@ -27,7 +27,8 @@ L'éxécution se fait automatiquement sur 1, 2, puis 4 processus.
 Ce projet consiste à résoudre l'équation
 de chaleur 2D à coefficient constant : 
 $$\partial_{t}T = \kappa \Delta T$$
-Les condition sont données par la température initiale ainsi que par une condition de Dirichlet aux bords.
+Les condition sont données par la température initiale ainsi que par une condition de Dirichlet aux bords. 
+
 $$
 \begin{aligned}
 &T(t=0,x,y)=T_{max} exp(\frac{-x^{2}-y^{2}}{\sigma^{2}}) \\
@@ -41,17 +42,23 @@ solution exacte est une gaussienne qui s'abaisse au cours du temps :
 
 $$T_{ex}(t,x,y) = \frac{T_{max}}{1 + 4\kappa t / \sigma^{2}} exp(\frac{-x^{2}-y^{2}}{4\kappa t + \sigma^{2}})$$
 
-Avant de se lancer dans le calcul, on remplie la matrice $(T)_{i,j}$
-avec la fonction $T_{ex}(0,x,y)$.
+## Méthode numérique
+La température est représentée par une matrice $(T)_{i,j}$. \
+À $t=0$, 
+$$T^0_{i,j} = T_{ex}\left( i \times \frac
+{x_{max} - x_{min}}{N_x}, j \times \frac
+{y_{max} - y_{min}}{N_y}, 0 \right)$$
 
-On utilise la méthode des différences finies explicite :
 
-$$T_{i,j}^{n+1} = T_{i,j}^{n} + \kappa d t(\frac{T_{i+1,j}^{n}-2T_{i,j}^{n}+T_{i-1,j}^{n}}{dx^{2}} + \frac{T_{i,j+1}^{n}-2T_{i,j}^{n}+T_{i,j-1}^{n}}{dy^{2}})$$
+Pour mettre à jour $T$, on utilise la méthode des différences finies explicite :
 
-On réalise cette opération $Nt$ fois. La méthode étant explicite, on
-fixe $$dt$$ à $$1/2$$ fois la condition CFL :
+$$T_{i,j}^{n+1} = T_{i,j}^{n} + \kappa d t \left( \frac{T_{i+1,j}^{n}-2T_{i,j}^{n}+T_{i-1,j}^{n}}{dx^{2}} + \frac{T_{i,j+1}^{n}-2T_{i,j}^{n}+T_{i,j-1}^{n}}{dy^{2}} \right)$$
 
-$$dt = \frac{1}{4 \kappa (\frac{1}{dx^{2}} + \frac{1}{dy^{2}})}$$
+La méthode étant explicite, on fixe $\Delta t$ à $1/2$ fois la condition CFL :
+
+$$\Delta t =\frac{1}{4} \frac{1}{ \kappa \left( \frac{1}{\Delta x^{2}} + \frac{1}{\Delta y^{2}} \right)}$$
+
+Cette opération est réalisée $N_t = \frac{t_f}{\Delta T}$ fois où $t_f$ est le temps final auquel est calculée la température.
 
 ## Démarche
 
@@ -105,4 +112,5 @@ $$\Delta t \leftarrow \frac{\Delta t}{4} $$
 ![errors_t=5e4](https://github.com/user-attachments/assets/9eb0595a-ddf7-4d7c-8d60-1a55bc8a6c33)
 
 Dans un premier temps, les courbes se superposent pour chaque nombre de processus, ce qui montre que la parallélisation a fonctionné. L'affichage log-log en base 2 s'approche d'une droite descendante, ce qui correspond aux résultats attendus.
+
 
