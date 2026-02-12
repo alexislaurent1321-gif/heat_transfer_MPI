@@ -87,14 +87,12 @@ On résout l'équation pour :
 - $\kappa = 10^{-6}$
 - $\sigma = 0,3$
 
-
-
-
-![performances_t=5e4](https://github.com/user-attachments/assets/798080bd-6cfa-4726-9d5b-74b706927f07)
-
 Pour évaluer la peformance en fonction du nombre de processus $nprocs$, on calcule le speedup : 
 $$\frac{\tau_{nprocs}}{\tau_{nprocs=1}}$$
-où $\tau$ désigne de calcule de calcule de $T$ au temps $t$.
+où $\tau$ désigne de calcule de calcule de $T$ au temps final $t_f$.
+
+![performances_t=5e4](https://github.com/user-attachments/assets/798080bd-6cfa-4726-9d5b-74b706927f07)
+On  observe un speedup de $2$ lorsque $nprocs=2$ et il se stabilise à $3,5$ pour 4 processus.
 
 # Convergence
 En chaque configuration, on divisé la plus petite unité du domaine par deux : \
