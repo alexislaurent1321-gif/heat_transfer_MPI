@@ -25,12 +25,16 @@ L'éxécution se fait automatiquement sur 1, 2, puis 4 processus.
 # Problème mathématique
 
 Ce projet consiste à résoudre l'équation
-de chaleur 2D à coefficient constant. On dispose comme information d'une
-condition initiale qui correspond à la solution analytique en $t=0$ :
-
+de chaleur 2D à coefficient constant : 
 $$\partial_{t}T = \kappa \Delta T$$
-
-$$T(t=0,x,y)=T_{max} exp(\frac{-x^{2}-y^{2}}{\sigma^{2}})$$
+Les condition sont données par la température initiale ainsi que par une condition de Dirichlet aux bords.
+$$
+\begin{aligned}
+&T(t=0,x,y)=T_{max} exp(\frac{-x^{2}-y^{2}}{\sigma^{2}}) \\
+&T(t, x=0 \text{ ou } 1, y) = f(t,y) \\
+&T(t, x, y = 0 \text{ ou } 1) = f(t,x)
+\end{aligned}
+$$
 
 où $\kappa$ est la diffusivité thermique. Dans cette configuration de la
 solution exacte est une gaussienne qui s'abaisse au cours du temps :
