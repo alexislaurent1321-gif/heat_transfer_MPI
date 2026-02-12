@@ -78,6 +78,8 @@ $$if \ rank < nprocs-1 \ : $$ \
 $$\qquad recv(T[N_{local}-1][:], rank+1)$$ \
 $$\qquad send(T[N_{local}-2][:], rank+1)$$
 
+
+
 # Résultats
 Les paramètre : 
 On calcule la fonction sur un carré discrétisé par $N_x = N_y = N$ cellules sur chaque axe.
@@ -99,7 +101,7 @@ En chaque configuration, on divisé la plus petite unité du domaine par deux : 
 $$\Delta x \leftarrow \frac{\Delta x}{2}, \ \Delta y \leftarrow \frac{\Delta y}{2}$$
 
 En conséquence, $\Delta t$ est adapté selon la condition CFL : \
-$$\Delta t = \frac{1}{4 \kappa (\frac{1}{dx^{2}} + \frac{1}{dy^{2}})}$$ donc 
+$$\Delta t = \frac{1}{4 \kappa (\frac{1}{\Delta x^{2}} + \frac{1}{\Delta y^{2}})}$$ donc 
 $$\Delta t \leftarrow \frac{\Delta t}{4} $$
 
 
