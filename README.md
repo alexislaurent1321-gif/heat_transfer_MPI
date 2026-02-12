@@ -1,3 +1,5 @@
+![T_t=5e4](https://github.com/user-attachments/assets/1f237914-5d70-4b81-a1a8-4d15747925e1)
+
 # Compilation et exécution
 Le programme nécessite l'installation des bibliothèques `matplotlib` et `numpy` pour python ainsi que l'installation de `MPI`. La compilation et l'exécution se font sur linux avec l'instruction `bash run.sh`.
 
@@ -58,6 +60,7 @@ $$\begin{aligned}
 \end{aligned}$$
 
 ### Parallélisation
+<img width="935" height="312" alt="124" src="https://github.com/user-attachments/assets/9351f347-616c-4fa1-9d43-43a528035f65" />
 
 Nous avons défini précédemment un bloc de taille $\frac{N}{nprocs}$.
 Cependant, nous devrions pour chaque ligne avoir accès à la ligne
@@ -74,9 +77,13 @@ $$if \ rank < nprocs-1 \ : $$ \
 $$\qquad recv(T[N_{local}-1][:], rank+1)$$ \
 $$\qquad send(T[N_{local}-2][:], rank+1)$$
 
+# Résultats
+![performances_t=5e4](https://github.com/user-attachments/assets/798080bd-6cfa-4726-9d5b-74b706927f07)
+
 # Convergence
 
 L'erreur
+![errors_t=5e4](https://github.com/user-attachments/assets/9eb0595a-ddf7-4d7c-8d60-1a55bc8a6c33)
 
 En affichant le log-log, la courbe est linéaire et les résultats sont les mêmes pour chaque nombre de processus. La parallélisation a donc fonctionné.
 
