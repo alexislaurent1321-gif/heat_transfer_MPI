@@ -52,7 +52,7 @@ $$T^0_{i,j} = T_{ex}\left( i \times \frac
 
 Pour mettre à jour $T$, on utilise la méthode des différences finies explicite :
 
-$$T_{i,j}^{n+1} = T_{i,j}^{n} + \kappa d t \left( \frac{T_{i+1,j}^{n}-2T_{i,j}^{n}+T_{i-1,j}^{n}}{dx^{2}} + \frac{T_{i,j+1}^{n}-2T_{i,j}^{n}+T_{i,j-1}^{n}}{dy^{2}} \right)$$
+$$T_{i,j}^{n+1} = T_{i,j}^{n} + \kappa \Delta t \left( \frac{T_{i+1,j}^{n}-2T_{i,j}^{n}+T_{i-1,j}^{n}}{dx^{2}} + \frac{T_{i,j+1}^{n}-2T_{i,j}^{n}+T_{i,j-1}^{n}}{dy^{2}} \right)$$
 
 La méthode étant explicite, on fixe $\Delta t$ à $1/2$ fois la condition CFL :
 
@@ -60,26 +60,7 @@ $$\Delta t =\frac{1}{4} \frac{1}{ \kappa \left( \frac{1}{\Delta x^{2}} + \frac{1
 
 Cette opération est réalisée $N_t = \frac{t_f}{\Delta T}$ fois où $t_f$ est le temps final auquel est calculée la température.
 
-## Démarche
-
-### Initialisation de T
-
-La parallélisation se fait par bloc sur l'axe $x$ de la matrice
-$(T)_{i,j}$.
-
-Soit $rank$ et $nprocs$, respectivement le numéro de processus et le
-nombre total de processus utilisés pendant l'éxécution et $N$ la taille
-de la matrice.\
-$$T_{i,j} = \frac{T_{max}}{1 + 4\kappa t / \sigma^{2}} exp(\frac{-x_{i}^{2}-y_{j}^{2}}{4\kappa t + \sigma^{2}})$$
-
-où
-
-$$\begin{aligned}
-&x_{i} = x_{min} + (N \* rank+i)\frac{x_{max}-x_{min}}{N*nprocs} \\
-&y_{j} = y_{min} + j\frac{y_{max}-y_{min}}{N}
-\end{aligned}$$
-
-### Parallélisation
+# Parallélisation
 <img width="935" height="312" alt="124" src="https://github.com/user-attachments/assets/9351f347-616c-4fa1-9d43-43a528035f65" />
 
 Nous avons défini précédemment un bloc de taille $\frac{N}{nprocs}$.
