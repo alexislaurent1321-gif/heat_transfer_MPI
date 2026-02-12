@@ -5,11 +5,20 @@ Le programme nécessite l'installation des bibliothèques `matplotlib` et `numpy
 
 # Structure du projet
 
-- `Param.h` : Contient les paramètres physiques et numériques du problème
-- `solve` :` Contient les fonctions parcticipant à la résolution système et calcul de T exact
-- `merge` : fusionne les fichiers de onnées calculés pour chaque processus
-- `plot_mpi.py` : affiche le temps d'éxécution en fonction de la taille du système choisie avec matplotlib
-- `plot_T.py` : affiche la température calculée avec matplotlib
+- `Parameters.json` : fichier contenant les paramètres physiques et numériques du problème
+  
+### `include`
+- `param.h` : lis les paramètres du fichier `json` et actualise $\Delta t$ en fonction de la discrétisation utilisée
+- `solve.h` : Contient les fonctions parcticipant à la résolution système et calcul de l'erreur
+
+### `src`
+- `solve.cpp`
+- `main.cpp` 
+
+### `graph` 
+- `plot_mpi.py` : affiche le speedup et la courbe d'erreur en fonction de la discrétisation du domaine
+- `plot_T.py` : affiche la température au temps $t$ avec la plus fine discrétisation choisie
+
 
 L'éxécution se fait automatiquement sur 1, 2, puis 4 processus.
 
@@ -81,9 +90,15 @@ $$\qquad send(T[N_{local}-2][:], rank+1)$$
 ![performances_t=5e4](https://github.com/user-attachments/assets/798080bd-6cfa-4726-9d5b-74b706927f07)
 
 # Convergence
+En chaque configuration, on divisé la plus petite unité du domaine par deux : \
+$$\Delta x \leftarrow \frac{\Delta x}{2}, \ \Delta y \leftarrow \frac{\Delta y}{2}$$
 
-L'erreur
+En conséquence, $\Delta t$ est adapté selon la condition CFL : \
+$$\Delta t = \frac{1}{4 \kappa (\frac{1}{dx^{2}} + \frac{1}{dy^{2}})}$$ donc 
+$$\Delta t \leftarrow \frac{\Delta t}{4} $$
+
+
 ![errors_t=5e4](https://github.com/user-attachments/assets/9eb0595a-ddf7-4d7c-8d60-1a55bc8a6c33)
 
-En affichant le log-log, la courbe est linéaire et les résultats sont les mêmes pour chaque nombre de processus. La parallélisation a donc fonctionné.
+Dans un premier temps, les courbes se superposent pour chaque nombre de processus, ce qui montre que la parallélisation a fonctionné. L'affichage log-log en base 2 s'approche d'une droite descendante, ce qui correspond aux résultats attendus.
 
