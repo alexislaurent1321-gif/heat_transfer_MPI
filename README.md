@@ -52,7 +52,7 @@ $$T^0_{i,j} = T_{ex}\left( i \times \frac
 
 Pour mettre à jour $T$, on utilise la méthode des différences finies explicite :
 
-$$T_{i,j}^{n+1} = T_{i,j}^{n} + \kappa \Delta t \left( \frac{T_{i+1,j}^{n}-2T_{i,j}^{n}+T_{i-1,j}^{n}}{dx^{2}} + \frac{T_{i,j+1}^{n}-2T_{i,j}^{n}+T_{i,j-1}^{n}}{dy^{2}} \right)$$
+$$T_{i,j}^{n+1} = T_{i,j}^{n} + \kappa \Delta t \left( \frac{T_{i+1,j}^{n}-2T_{i,j}^{n}+T_{i-1,j}^{n}}{\Delta x^{2}} + \frac{T_{i,j+1}^{n}-2T_{i,j}^{n}+T_{i,j-1}^{n}}{\Delta y^{2}} \right)$$
 
 La méthode étant explicite, on fixe $\Delta t$ à $1/2$ fois la condition CFL :
 
@@ -79,7 +79,22 @@ $$\qquad recv(T[N_{local}-1][:], rank+1)$$ \
 $$\qquad send(T[N_{local}-2][:], rank+1)$$
 
 # Résultats
+Les paramètre : 
+On calcule la fonction sur un carré discrétisé par $N_x = N_y = N$ cellules sur chaque axe.
+On résout l'équation pour : 
+- $N = \{32, 64, 128, 256, 512\}$
+- $t_f = 10^5$
+- $\kappa = 10^{-6}$
+- $\sigma = 0,3$
+
+
+
+
 ![performances_t=5e4](https://github.com/user-attachments/assets/798080bd-6cfa-4726-9d5b-74b706927f07)
+
+Pour évaluer la peformance en fonction du nombre de processus $nprocs$, on calcule le speedup : 
+$$\frac{\tau_{nprocs}}{\tau_{nprocs=1}}$$
+où $\tau$ désigne de calcule de calcule de $T$ au temps $t$.
 
 # Convergence
 En chaque configuration, on divisé la plus petite unité du domaine par deux : \
@@ -93,5 +108,6 @@ $$\Delta t \leftarrow \frac{\Delta t}{4} $$
 ![errors_t=5e4](https://github.com/user-attachments/assets/9eb0595a-ddf7-4d7c-8d60-1a55bc8a6c33)
 
 Dans un premier temps, les courbes se superposent pour chaque nombre de processus, ce qui montre que la parallélisation a fonctionné. L'affichage log-log en base 2 s'approche d'une droite descendante, ce qui correspond aux résultats attendus.
+
 
 
