@@ -1,3 +1,7 @@
+# Introduction
+
+Ce projet consiste à une introduction à MPI en résolvant l'équation de la chaleur 2D.
+
 ![T_t=5e4](https://github.com/user-attachments/assets/1f237914-5d70-4b81-a1a8-4d15747925e1)
 
 # Compilation et exécution
