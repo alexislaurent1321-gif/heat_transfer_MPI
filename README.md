@@ -109,9 +109,10 @@ $$\Delta t = \frac{1}{4 \kappa (\frac{1}{\Delta x^{2}} + \frac{1}{\Delta y^{2}})
 $$\Delta t \leftarrow \frac{\Delta t}{4} $$
 
 La méthode de discrétisation utilisées est celle des différences finies centrées qui converge en $o(\Delta x^2)$. De ce fait, 
-$$err(N) \propto \frac{1}{N^2} = \Delta x^2 = \Delta y^2 \\
-\begin{aligned}\Leftrightarrow &
-\log(err(N)) \propto -2\log(N) \\
+
+$$\begin{aligned}
+&err(N) \propto \frac{1}{N^2} = \Delta x^2 = \Delta y^2 \\
+\Leftrightarrow & \log(err(N)) \propto -2\log(N) \\
 \Leftrightarrow &\log(err(N)) = -2\log(N) + \text{cste} 
 \end{aligned}
 $$
@@ -121,7 +122,8 @@ L'affichage log-log correspond doit donc correspondre à une droite de pente $-2
 
 ![errors_t=5e4](https://github.com/user-attachments/assets/9eb0595a-ddf7-4d7c-8d60-1a55bc8a6c33)
 
-Dans un premier temps, les courbes se superposent pour chaque nombre de processus, ce qui montre que la parallélisation a fonctionné. L'affichage log-log en base 2 s'approche d'une droite descendante, ce qui correspond aux résultats attendus.
+En plus des résultats attendus, on observe que les courbes se superposent pour chaque nombre de processus, ce qui montre que la parallélisation a fonctionné. 
+
 
 
 
