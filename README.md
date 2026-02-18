@@ -111,13 +111,13 @@ $$\Delta t \leftarrow \frac{\Delta t}{4} $$
 La méthode de discrétisation utilisées est celle des différences finies centrées qui converge en $o(\Delta x^2)$. De ce fait, 
 
 $$\begin{aligned}
-&err(N) \propto \frac{1}{N^2} = \Delta x^2 = \Delta y^2 \\
-\Leftrightarrow & \log(err(N)) \propto -2\log(N) \\
+&err(N) = \frac{\text{cste}}{N^2} \\
+\Leftrightarrow & \log(err(N)) \propto \log\left( \frac{\text{cste}}{N^2} \right) \\
 \Leftrightarrow &\log(err(N)) = -2\log(N) + \text{cste} 
 \end{aligned}
 $$
 
-L'affichage log-log correspond doit donc correspondre à une droite de pente $-2$.
+L'affichage log-log correspond donc à une droite de pente $-2$.
 
 
 ![errors_t=5e4](https://github.com/user-attachments/assets/9eb0595a-ddf7-4d7c-8d60-1a55bc8a6c33)
