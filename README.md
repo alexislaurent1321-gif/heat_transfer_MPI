@@ -71,13 +71,18 @@ Cette opération est réalisée $N_t = \frac{t_f}{\Delta T}$ fois où $t_f$ est 
 On note : 
 - `Nx_local`, `Ny_local` : représentent la discrétisation du domaine local
 - `Nx_ghost`, `Ny_ghost` : sont les variables de discrétisation locales auxquelles on ajoute les cellules fantômes, `Nx_ghost`=`Nx_local+2` et `Ny_ghost`=`Ny_local+2`
-- `dim` est un tableau 2D contenant les dimensions de la discrétisation du domaine. Exemple : {1,1} pour un processus, {2,1} pour deux processus, {2,2} pour 4 processus.
-- `coords` est un tableau contenant les 
+- `dim` est un tableau 2D contenant les dimensions de la discrétisation du domaine. **Exemple :** {1,1} pour un processus, {2,1} pour deux processus, {2,2} pour 4 processus.
+- `coords` est un tableau contenant les coordonnées du sous-domaine associé au process. **Exemple :** les coordonnées peuvent être {0,0}, {0,1}, {1,0}, {1,1} dans le cas de 4 processus. 
   
-## Applications des conditions de bord
+## Application des conditions de bord
 
+Pour appliquer les conditions de bord en parallèle, on vérifie à quels bords correspondent les coordonnées : 
+- {0,0} : application de la condition de bord en haut et à gauche
+- {0,1} : application de la condition de bord en haut et à droite
+- {1,0} : application de la condition de bord en bas et à gauche
+- {1,1} : application de la condition de bord en bas et à droite
 
-## Applications des condiations initiales
+## Passage des cellules fantômes
 
 Nous avons défini précédemment un bloc de taille $\frac{N}{nprocs}$.
 Cependant, nous devrions pour chaque ligne avoir accès à la ligne
