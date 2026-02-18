@@ -67,6 +67,18 @@ Cette opération est réalisée $N_t = \frac{t_f}{\Delta T}$ fois où $t_f$ est 
 # Parallélisation
 <img width="935" height="312" alt="124" src="https://github.com/user-attachments/assets/9351f347-616c-4fa1-9d43-43a528035f65" />
 
+## Notations 
+On note : 
+- `Nx_local`, `Ny_local` : représentent la discrétisation du domaine local
+- `Nx_ghost`, `Ny_ghost` : sont les variables de discrétisation locales auxquelles on ajoute les cellules fantômes, `Nx_ghost`=`Nx_local+2` et `Ny_ghost`=`Ny_local+2`
+- `dim` est un tableau 2D contenant les dimensions de la discrétisation du domaine. Exemple : {1,1} pour un processus, {2,1} pour deux processus, {2,2} pour 4 processus.
+- `coords` est un tableau contenant les 
+  
+## Applications des conditions de bord
+
+
+## Applications des condiations initiales
+
 Nous avons défini précédemment un bloc de taille $\frac{N}{nprocs}$.
 Cependant, nous devrions pour chaque ligne avoir accès à la ligne
 précédente et à la ligne suivante. Il faut donc ajouter au bloc la
