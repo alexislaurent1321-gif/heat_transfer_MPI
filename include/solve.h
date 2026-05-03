@@ -5,11 +5,11 @@
 #ifndef SOLVE_H
 #define SOLVE_H
 
-// Filling the T matrix with the exact solution
-void T_ex(std::vector<double>& T, double t, int Nx_g, int Ny_g, int coords[2]);
-
 // Exact solution of T evaluated at a point
 double T_ex(double t, double x, double y); 
+
+// Filling the T matrix with the exact solution
+void T_ex_fill(std::vector<double>& T, double t, int Nx_g, int Ny_g, int coords[2]);
 
 // Calculation of the infinite standard error between T and T_ex
 double error_T(const std::vector<double>& T, int Nx_g, int Ny_g, int coords[2]);
@@ -20,6 +20,9 @@ double max_T(const std::vector<double>& T, int Nx_local, int Ny_local);
 /*
 Functions implementing the parallelized finite difference method
 */
+
+// Apply Dirichlet boundary conditions to the global domain edges
+void apply_boundaries(std::vector<double>& T, double t, int Nx_ghost, int Ny_ghost, int coords[2], int dims[2]);
 
 // Update T using finite differences over a time iteration
 void updateT(const std::vector<double>& T, std::vector<double>& T_plus, int Nx_ghost, int Ny_ghost, int coords[2]) ;   
