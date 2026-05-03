@@ -151,9 +151,9 @@ double solve(int N, int rank, int nprocs, std::shared_ptr<double> err_max, std::
 
     int coords[2];
     MPI_Cart_coords(cart_comm, rank, 2, coords);
-    int r_up, r_down, r_left, r_right;
-    MPI_Cart_shift(cart_comm, 0, 1, &r_up, &r_down);   
-    MPI_Cart_shift(cart_comm, 1, 1, &r_left, &r_right);
+    int rank_up, rank_down, rank_left, rank_right;
+    MPI_Cart_shift(cart_comm, 0, 1, &rank_up, &rank_down);   
+    MPI_Cart_shift(cart_comm, 1, 1, &rank_left, &rank_right);
 
     // Define Local Dimensions
     int Nx_local = N / dims[0];
@@ -176,16 +176,16 @@ double solve(int N, int rank, int nprocs, std::shared_ptr<double> err_max, std::
 
     for (int iter = 0; iter < p.Nt; ++iter) {
         // Exchange Rows (Up/Down)
-        MPI_Sendrecv(&T[1*Ny_ghost + 1], Ny_local, MPI_DOUBLE, r_up, 0,
-                     &T[(Nx_ghost-1)*Ny_ghost + 1], Ny_local, MPI_DOUBLE, r_down, 0, cart_comm, MPI_STATUS_IGNORE);
-        MPI_Sendrecv(&T[(Nx_ghost-2)*Ny_ghost + 1], Ny_local, MPI_DOUBLE, r_down, 1,
-                     &T[0*Ny_ghost + 1], Ny_local, MPI_DOUBLE, r_up, 1, cart_comm, MPI_STATUS_IGNORE);
+        MPI_Sendrecv(&T[1*Ny_ghost + 1], Ny_local, MPI_DOUBLE, rank_up, 0,
+                     &T[(Nx_ghost-1)*Ny_ghost + 1], Ny_local, MPI_DOUBLE, rank_down, 0, cart_comm, MPI_STATUS_IGNORE);
+        MPI_Sendrecv(&T[(Nx_ghost-2)*Ny_ghost + 1], Ny_local, MPI_DOUBLE, rank_down, 1,
+                     &T[0*Ny_ghost + 1], Ny_local, MPI_DOUBLE, rank_up, 1, cart_comm, MPI_STATUS_IGNORE);
 
         // Exchange Columns (Left/Right)
-        MPI_Sendrecv(&T[1*Ny_ghost + 1], 1, column_type, r_left, 2,
-                     &T[1*Ny_ghost + (Ny_ghost-1)], 1, column_type, r_right, 2, cart_comm, MPI_STATUS_IGNORE);
-        MPI_Sendrecv(&T[1*Ny_ghost + (Ny_ghost-2)], 1, column_type, r_right, 3,
-                     &T[1*Ny_ghost + 0], 1, column_type, r_left, 3, cart_comm, MPI_STATUS_IGNORE);
+        MPI_Sendrecv(&T[1*Ny_ghost + 1], 1, column_type, rank_left, 2,
+                     &T[1*Ny_ghost + (Ny_ghost-1)], 1, column_type, rank_right, 2, cart_comm, MPI_STATUS_IGNORE);
+        MPI_Sendrecv(&T[1*Ny_ghost + (Ny_ghost-2)], 1, column_type, rank_right, 3,
+                     &T[1*Ny_ghost + 0], 1, column_type, rank_left, 3, cart_comm, MPI_STATUS_IGNORE);
 
         // Apply Global Boundary Conditions (Avoids "frozen" edges)
         apply_boundaries(T, iter * p.dt, Nx_ghost, Ny_ghost, coords, dims);

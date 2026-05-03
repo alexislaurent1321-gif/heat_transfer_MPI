@@ -83,21 +83,22 @@ Pour appliquer les conditions de bord en parallèle, on vérifie à quels bords 
 - {1,1} : application de la condition de bord en bas et à droite
 
 ## Passage des cellules fantômes
+Les sous domaines étant rectangulaires, on doit effectuer au total quatre échanges.
+On utilise la fonction `MPI_Sendrecv` pour chacun d'entre-eux.
 
-Nous avons défini précédemment un bloc de taille $\frac{N}{nprocs}$.
-Cependant, nous devrions pour chaque ligne avoir accès à la ligne
-précédente et à la ligne suivante. Il faut donc ajouter au bloc la
-dernière ligne du bloc précédent et la première ligne du bloc suivant.
-Le bloc doit donc avoir une taille $N_{local} = \frac{N}{nprocs}+2$.\
-On veille bien à appliquer cette méthode sur les rangs intermédiaires :
+### Echanges entre la ligne du bas avec la ligne du haut du rang supérieur
+Dans un sous domaine la première ligne (après la ligne fantôme) à `Ny_ghost+1` et la dernière ligne a pour indice `Nx_ghost-1)*Ny_ghost + 1`.
+
+### Echanges entre la ligne du bas avec la ligne du haut du rang supérieur
+Dans un sous domaine la première ligne (après la ligne fantôme) à `(Nx_ghost-2)*Ny_ghost + 1` et la dernière ligne a pour indice `1`.
+
+### Echanges entre la ligne du bas avec la ligne du haut du rang supérieur
+Dans un sous domaine la première ligne (après la ligne fantôme) à `Ny_ghost + 1` et la dernière ligne a pour indice `Ny_ghost + (Ny_ghost-1)`.
+
+### Echanges entre la ligne du bas avec la ligne du haut du rang supérieur
+Dans un sous domaine la première ligne (après la ligne fantôme) à `Ny_ghost + (Ny_ghost-2)` et la dernière ligne a pour indice `Ny_ghost`.
 
 
-$$if \ rank>0 \ : $$ \
-$$\qquad send(T[1][:], rank-1)$$ \
-$$\qquad recv(T[0][:], rank-1)$$ \
-$$if \ rank < nprocs-1 \ : $$ \
-$$\qquad recv(T[N_{local}-1][:], rank+1)$$ \
-$$\qquad send(T[N_{local}-2][:], rank+1)$$
 
 
 
