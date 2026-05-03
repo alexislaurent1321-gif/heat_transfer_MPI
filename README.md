@@ -142,6 +142,16 @@ L'affichage log-log correspond donc à une droite de pente $-2$.
 
 En plus des résultats attendus, on observe que les courbes se superposent pour chaque nombre de processus, ce qui montre que la parallélisation a fonctionné. 
 
+# Installation et exécution
+
+Pour cloner le projet : 
+```bash
+git clone --recurse-submodules https://github.com/alexislaurent1321-gif/heat_transfer_MPI.git
+```
+Le projet nécessite de plus [l'installation de MPI](https://docs.open-mpi.org/en/v5.0.x/installing-open-mpi/quickstart.html).
+
+Pour exécuter le projet, taper l'instruction `bash run.sh` ou `wsl sh run.sh`.
+
 
 
 
