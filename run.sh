@@ -16,7 +16,4 @@ fi
 python3 graph/plot_T.py
 python3 graph/plot_mpi.py
 
-rm mpi_results*.txt 
-rm error*.txt 
-rm T_data*.txt 
-rm Process_datas.txt
+rm *.txt 
