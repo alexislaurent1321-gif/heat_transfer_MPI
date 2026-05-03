@@ -1,0 +1,6 @@
+[submodule "extern/fmt"]
+	path = extern/fmt
+	url = https://github.com/fmtlib/fmt.git
+[submodule "extern/--force"]
+	path = extern/--force
+	url = https://github.com/nlohmann/json.git
