@@ -1,6 +1,6 @@
 #include "mpi.h"
 #include "param.h"
-#include "solve.h"
+#include "solver.h"
 
 extern Param p;
 

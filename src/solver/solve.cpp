@@ -1,7 +1,7 @@
 #define FMT_HEADER_ONLY
 #include "mpi.h"
 #include "param.h"
-#include "solve.h"
+#include "solver.h"
 #include <cmath>
 #include <fstream>
 #include <iostream>

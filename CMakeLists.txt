@@ -11,10 +11,10 @@ add_subdirectory(extern/json)
 
 add_executable(heat_solver 
     src/main.cpp 
-    src/solve.cpp
-    src/error.cpp
-    src/temperature.cpp
-    src/apply_boundaries.cpp
+    src/solver/solve.cpp
+    src/solver/error.cpp
+    src/solver/temperature.cpp
+    src/solver/apply_boundaries.cpp
     src/param.cpp
 )
 
