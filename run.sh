@@ -16,4 +16,4 @@ fi
 python3 graph/plot_T.py
 python3 graph/plot_mpi.py
 
-rm *.txt 
+find . -maxdepth 1 -type f -name "*.txt" ! -name "CMakeLists.txt" -delete
