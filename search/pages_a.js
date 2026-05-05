@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['header_20only_0',['Header only',['../md_extern_json_docs_mkdocs_docs_integration_index.html',1,'']]]
+  ['notations_0',['Notations',['../md_README.html#autotoc_md6',1,'']]],
+  ['numérique_1',['Méthode numérique',['../md_README.html#autotoc_md4',1,'']]]
 ];

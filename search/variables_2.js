@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['base_0',['base',['../structVehicle.html#ad7970f528d429f6fc1725173e93a77c2',1,'Vehicle::base()'],['../structCar.html#ab8ff28306286da5a8b14fa9bdccaafaa',1,'Car::base()'],['../structTruck.html#ad0ac321609dda1a6c552488b05ec7ac8',1,'Truck::base()']]],
-  ['byte_1',['byte',['../classdetail_1_1parse__error.html#a5bce7d135aa3a38d1d3f4ed7bf8615e1',1,'detail::parse_error::byte()'],['../classnlohmann_1_1detail_1_1parse__error.html#a9505aaa1ca943be927eec7cc579592ff',1,'nlohmann::detail::parse_error::byte()']]]
+  ['nt_0',['Nt',['../structParam.html#a7befd2d988b54e580b5c83463b2c60e6',1,'Param']]]
 ];
