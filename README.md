@@ -9,6 +9,29 @@ Le programme nécessite l'installation des bibliothèques `matplotlib` et `numpy
 
 # Structure du projet
 
+```bash
+├── graph
+│   ├── img
+│   │   ├── T_t=5e4.jpg
+│   │   ├── errors_t=5e4.jpg
+│   │   └── performances_t=5e4.jpg
+│   ├── plot_T.py
+│   └── plot_mpi.py
+├── include
+│   ├── param.h
+│   └── solver.h
+├── parameters.json
+├── run.sh
+├── src
+│   ├── main.cpp
+│   ├── param.cpp
+│   └── solver
+│       ├── apply_boundaries.cpp
+│       ├── error.cpp
+│       ├── solve.cpp
+│       └── temperature.cpp
+```
+
 - `Parameters.json` : fichier contenant les paramètres physiques et numériques du problème
   
 ### `include`
