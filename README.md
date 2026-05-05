@@ -1,3 +1,5 @@
+[![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://alexislaurent1321-gif.github.io/heat_transfer_MPI/)
+
 # Introduction
 
 Ce projet consiste à une introduction à MPI en résolvant l'équation de la chaleur 2D.
