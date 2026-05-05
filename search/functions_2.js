@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['load_0',['load',['../structParam.html#aa2d52bbb2bb33d4c9f14e20bc70b5859',1,'Param']]]
+  ['close_0',['close',['../structcmd_8h.html#ae152484c890a24e4d9b4980e7b965be0',1,'structcmd.h']]]
 ];

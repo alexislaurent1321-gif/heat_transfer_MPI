@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['cellules_20fantômes_0',['Passage des cellules fantômes',['../md_README.html#autotoc_md8',1,'']]],
-  ['compilation_20et_20exécution_1',['Compilation et exécution',['../md_README.html#autotoc_md1',1,'']]],
-  ['conditions_20de_20bord_2',['Application des conditions de bord',['../md_README.html#autotoc_md7',1,'']]],
-  ['convergence_3',['Convergence',['..//home/runner/work/heat_transfer_MPI/heat_transfer_MPI/README.md#autotoc_md14',1,'']]]
+  ['b_0',['B',['../classB.html',1,'B'],['../memgrp_8cpp.html#a7ddc550b157ed6f8db58e462b504ab0f',1,'B():&#160;memgrp.cpp']]],
+  ['base_1',['base',['../structVehicle.html#ad7970f528d429f6fc1725173e93a77c2',1,'Vehicle::base()'],['../structCar.html#ab8ff28306286da5a8b14fa9bdccaafaa',1,'Car::base()'],['../structTruck.html#ad0ac321609dda1a6c552488b05ec7ac8',1,'Truck::base()']]],
+  ['bug_20list_2',['Bug List',['../bug.html',1,'']]]
 ];

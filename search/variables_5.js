@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['xmax_0',['xmax',['../structParam.html#a23140d149004e514aaacb413747c21c3',1,'Param']]],
-  ['xmin_1',['xmin',['../structParam.html#a87bcc2d428ca8e6b9bb8032cabe76fc2',1,'Param']]]
+  ['globalvalue_0',['globalValue',['../file_8h.html#a4a86bef4b6181cb3f53bd0461a9a511b',1,'file.h']]],
+  ['globvar_1',['globVar',['../autolink_8cpp.html#a88d0bae800d600a11d7bd60f0bc4b858',1,'autolink.cpp']]]
 ];
