@@ -11,41 +11,23 @@ Le programme nécessite l'installation des bibliothèques `matplotlib` et `numpy
 
 ```bash
 ├── graph
-│   ├── img
-│   │   ├── T_t=5e4.jpg
-│   │   ├── errors_t=5e4.jpg
-│   │   └── performances_t=5e4.jpg
-│   ├── plot_T.py
-│   └── plot_mpi.py
+│   ├── img                  # images des graphes
+│   ├── plot_T.py            # affichage de la température
+│   └── plot_mpi.py          # affichage du speedup et de la convergence dyu schéma
 ├── include
-│   ├── param.h
-│   └── solver.h
-├── parameters.json
+│   ├── param.h              # imporation des paramètres physiques et numériques du problème / calcul du pas de temps
+│   └── solver.h             # fonctions pour calculer servant à l'équation de l'équation de la chaleur : solution exacte, schéma, erreur
+├── parameters.json          # paramètres physiques et numériques du problèmes à modifier par l'utilisateur
 ├── run.sh
 ├── src
 │   ├── main.cpp
 │   ├── param.cpp
 │   └── solver
-│       ├── apply_boundaries.cpp
-│       ├── error.cpp
-│       ├── solve.cpp
-│       └── temperature.cpp
+│       ├── apply_boundaries.cpp      # application des conditions de Dirichlet au bord
+│       ├── error.cpp                 # calcul de l'erreur relative du schéma  
+│       ├── solve.cpp                 # différences finies parallélisées
+│       └── temperature.cpp           # température exacte
 ```
-
-- `Parameters.json` : fichier contenant les paramètres physiques et numériques du problème
-  
-### `include`
-- `param.h` : lis les paramètres du fichier `json` et actualise $\Delta t$ en fonction de la discrétisation utilisée
-- `solve.h` : Contient les fonctions parcticipant à la résolution système et calcul de l'erreur
-
-### `src`
-- `solve.cpp`
-- `main.cpp` 
-
-### `graph` 
-- `plot_mpi.py` : affiche le speedup et la courbe d'erreur en fonction de la discrétisation du domaine
-- `plot_T.py` : affiche la température au temps $t$ avec la plus fine discrétisation choisie
-
 
 L'éxécution se fait automatiquement sur 1, 2, puis 4 processus.
 
