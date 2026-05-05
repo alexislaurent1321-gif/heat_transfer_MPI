@@ -2,11 +2,11 @@
 #include "param.h"
 #include "solver.h"
 
-extern Param p; 
+/** \file    temperature.cpp
+ *  \brief   Implementation of the exact temperature-related functions
+ */
 
-/*
-Exact solution
-*/
+extern Param p; 
 
 // Exact solution evaluated at a point (x,y) and time t
 double T_ex(double t, double x, double y) {

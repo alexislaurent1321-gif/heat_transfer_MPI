@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Function to reconstruct the full 2D matrix from the block data
 def reconstruct_2d():
     full_matrix = []
     nprocs_x, nprocs_y = np.loadtxt("Process_datas.txt", dtype=int)

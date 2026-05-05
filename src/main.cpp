@@ -7,6 +7,9 @@
 #include "solver.h"
 #include "param.h"
 
+/** \file    main.cpp
+ *  \brief   Main function for the MPI heat transfer simulation
+ */
 
 Param p; // Importing settings
 using namespace std;

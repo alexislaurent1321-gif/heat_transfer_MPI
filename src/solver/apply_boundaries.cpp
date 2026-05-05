@@ -2,6 +2,10 @@
 #include "param.h"
 #include "solver.h"
 
+/** \file    apply_boundaries.cpp
+ *  \brief   Implementation of the function to apply Dirichlet boundary conditions to the global domain edges
+ */
+
 extern Param p;
 
 // Apply Dirichlet boundary conditions to the global domain edges

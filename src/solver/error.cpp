@@ -2,6 +2,10 @@
 #include "param.h"
 #include "solver.h"
 
+/** \file    error.cpp
+ *  \brief   Implementation of the error calculation functions
+ */
+
 extern Param p; 
 
 // Error

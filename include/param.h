@@ -6,6 +6,10 @@
 #ifndef PARAM_H
 #define PARAM_H
 
+/** \file    param.h
+ *  \brief   Header file to import parameters from a JSON file and calculate numerical parameters according to system size
+ */
+
 using json = nlohmann::json;
 
 /**
@@ -34,16 +38,16 @@ struct Param{
     int Nt;                 ///< number of iterations for finite differences
 
     /**
-     * @brief   Load parameters from a JSON file
+     * \brief   Load parameters from a JSON file
      * 
-     * @param filename 
+     * \param filename 
      */
     void load(const std::string& filename);
 
     /**
-     * @brief   Update numerical parameters according to system size
+     * \brief   Update numerical parameters according to system size
      * 
-     * @param size 
+     * \param size 
      */
     void update(int size);
 };

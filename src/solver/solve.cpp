@@ -7,11 +7,11 @@
 #include <iostream>
 #include <fmt/core.h>
 
+/** \file    solve.cpp
+ *  \brief   Implementation of the solver functions
+ */
+
 extern Param p; 
-
-
-// Numarical calculation
-
 
 // Solver
 

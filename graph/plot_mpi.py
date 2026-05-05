@@ -8,7 +8,7 @@ data2 = np.loadtxt("mpi_results_2.txt")
 data4 = np.loadtxt("mpi_results_4.txt")
 
 
-# Plot time
+# Plot speedup
 
 sizes = data1[:,0] 
 time1 = data1[:,1]
