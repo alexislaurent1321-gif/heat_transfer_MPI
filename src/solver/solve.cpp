@@ -1,11 +1,11 @@
-#define FMT_HEADER_ONLY
 #include "mpi.h"
 #include "param.h"
 #include "solver.h"
 #include <cmath>
 #include <fstream>
 #include <iostream>
-#include <fmt/core.h>
+#include <format>
+
 
 /** \file    solve.cpp
  *  \brief   Implementation of the solver functions
@@ -85,7 +85,7 @@ double solve(int N, int rank, int nprocs, std::shared_ptr<double> err_max, std::
     double end_time = MPI_Wtime();
 
     // Data Export (One file per process for 2D reconstruction)
-    std::ofstream file(fmt::format("T_data_{}_{}.txt", coords[0], coords[1]));
+    std::ofstream file(std::format("T_data_{}_{}.txt", coords[0], coords[1]));
     for(int i = 1; i < Nx_ghost - 1; i++) {
         for(int j = 1; j < Ny_ghost - 1; j++) {
             file << T[i * Ny_ghost + j] << (j == Ny_ghost - 2 ? "" : " ");
