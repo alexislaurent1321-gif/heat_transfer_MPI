@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(MPI REQUIRED)
 
 add_subdirectory(extern/json)
+add_subdirectory(extern/Catch2)
 
 add_executable(heat_solver 
     src/main.cpp 
@@ -23,4 +24,19 @@ target_link_libraries(heat_solver
     PRIVATE 
     MPI::MPI_CXX
     nlohmann_json::nlohmann_json
+    Catch2::Catch2WithMain
 )
+
+
+# Testing
+enable_testing()
+
+add_executable(tests
+    tests/build_test.cpp
+)
+
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+
+include(CTest)
+include(Catch)
+catch_discover_tests(tests)
