@@ -1,5 +1,5 @@
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://alexislaurent1321-gif.github.io/heat_transfer_MPI/)
-![Build](https://github.com/alexislaurent1321-gif/heat_transfer_MPI/actions/workflows/ci.yml/badge.svg)
+![Build](https://github.com/alexislaurent1321-gif/heat_transfer_MPI/actions/workflows/build.yml/badge.svg)
 
 # Introduction
 
